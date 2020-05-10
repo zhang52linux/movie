@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="./source/jquery-3.4.1.min.js"></script>
+    <title>导航栏</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+        }
+        html,body{
+            height: 100%;
+        }body{
+             background-image: url("source/background.jpg");
+             background-size: cover;  /*自适应全覆盖*/
+             background-attachment: fixed;
+         }  #nav{
+                height: 41px;
+                border-top: 1px solid yellow;
+                border-bottom: 1px solid grey;
+            }  #nav a{
+                   display: inline-block;
+                   padding-left: 6px;
+                   padding-right: 6px;
+                   height: 41px;
+                   line-height: 41px;
+                   text-decoration: none;
+                   color: pink;
+                   font-size: 18px;
+                   font-weight: bold;
+                   font-family: 华文楷体;
+               }  #nav span{
+                      display: inline-block;
+                      padding-left: 6px;
+                      padding-right: 6px;
+                      height: 41px;
+                      line-height: 41px;
+                      text-decoration: none;
+                      color: pink;
+                      font-size: 18px;
+                      font-weight: bold;
+                      font-family: 华文楷体;
+                  }  #nav div{
+                         display: inline-block;
+                         padding-left: 6px;
+                         padding-right: 6px;
+                         height: 41px;
+                         line-height: 41px;
+                         text-decoration: none;
+                         color: pink;
+                         font-size: 18px;
+                         font-weight: bold;
+                         font-family: 华文楷体;
+                     } #nav div input{
+                           display: inline-block;
+                           padding-left: 6px;
+                           padding-right: 6px;
+                           text-decoration: none;
+                           width: 400px;
+                           color: pink;
+                           font-size: 18px;
+                           font-weight: bold;
+                           border: 1px solid pink;
+                           border-radius: 4px;
+                           font-family: 华文楷体;
+                       }  #nav div button {
+                              color: pink;
+                              font-size: 16px;
+                              font-weight: bold;
+                              border: 1px solid pink;
+                              border-radius: 4px;
+                              font-family: 华文楷体;
+                          }  #nav div select {
+                                 color: pink;
+                                 font-size: 16px;
+                                 font-weight: bold;
+                                 border: 1px solid pink;
+                                 border-radius: 4px;
+                                 font-family: 华文楷体;
+                             }  #nav a:hover{
+                                    color: yellow;
+                                    background-color: chocolate;
+                                }  .column{
+                                       border-radius: 4px;
+                                       margin-bottom: 5px;
+                                       box-shadow: 1px 1px 0px 1px aqua;
+                                       opacity: 0.5;
+                                       font-family: MingLiU_HKSCS-ExtB;
+                                       color: aqua;
+                                   }.ad{
+                                        width: auto;
+                                        height: 40px;
+                                        border: 1px solid aqua;
+                                        font-weight: bold;
+                                        font-family: MingLiU_HKSCS-ExtBs;
+                                        text-align: center;
+                                        line-height: 40px;
+                                        border-radius: 4px;
+                                        color: aqua;
+                                    }.advisement{
+                                         color: aqua;
+                                         padding: 0px;
+                                         margin: 0px;
+                                         font-weight: bold;
+                                         font-family: MingLiU_HKSCS-ExtBs;
+                                         text-align: center;}
+    </style>
+</head>
+<body>
+<div id="nav">
+    <span>本解析网支持:</span>
+    <a href="https://v.qq.com/" target="_blank">腾讯视频</a>
+    <a href="https://www.iqiyi.com/" target="_blank">爱奇艺视频</a>
+    <a href="https://www.youku.com/" target="_blank">优酷视频</a>
+    <div class="menu">
+            <span class="movie_url">&nbsp;
+                &nbsp;电影资源链接:&nbsp;<input class="movieBar" type="text" name="url" value="请输入电影资源链接...">&nbsp;
+            </span>
+        <span>
+             <button class="btn">立即播放</button>
+        </span>
+        <span>更换接口:</span>
+        <select name="jiekou" class="selected">
+            <option value="1">腾讯爱奇艺高清</option>
+            <option value="2">明日解析</option>
+            <option value="3">8090解析</option>
+            <option value="4">通用vip接口1</option>
+            <option value="5">通用vip接口2</option>
+            <option value="6">通用vip接口3</option>
+            <option value="7">通用vip接口4</option>
+        </select>
+    </div>
+</div>
+<marquee>
+    <p class="advisement">
+        【视频播放后可直接将链接分享给好友!打开后直接可以看!如多次刷新后还播放不了，请尝试换个解析接口，接口那么多总有一个适合你！！！】
+    </p>
+</marquee>
+
+<div class="column">
+    <div class="panel" style="background-color: rgb(255, 247, 199) !important; border-color: rgb(166, 118, 78)">
+        <div id="kj" class="panel-body">
+            <iframe src="" id="player" width=100% height="650px" frameborder="0" scrolling="no" seamless="" allowfullscreen="true" style="border-color: rgb(69, 49, 33)">
+            </iframe>
+        </div>
+    </div>
+</div>
+<div class="ad">
+    VIP视频解析+去广告
+</div>
+</body>
+<script>
+    $(function () {
+        $('.btn').click(function () {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if(xhr.readyState ==4&&xhr.status ==200){
+                    $('#player').attr('src',xhr.responseText);
+                    $('.column').css('opacity',1);
+                }
+            }
+            xhr.open('POST','movie_index.php',true);
+            var url = $('.movieBar').val()
+            var num = $('.selected').val()
+            var formData = new FormData();
+            formData.append('url',url);
+            formData.append('num',num);
+            xhr.send(formData);
+        });
+        $('.movieBar').focus(function () {
+            var curValue = $('.movieBar').val();
+            if(curValue == this.defaultValue){
+                $(this).val('');
+                $(this).css("backgroundColor:pink");
+            }
+        });
+        $('.movieBar').blur(function () {
+            var curValue = $('.movieBar').val();
+            if($.trim(curValue) == ''){
+                $(this).val(this.defaultValue);
+                $(this).css("backgroundColor:pink");
+            }
+        });
+    });
+</script>
+</html>
